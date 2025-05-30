@@ -1,30 +1,28 @@
 // app/contact/page.tsx
 "use client";
 
-import { useState } from 'react';
+import { useState } from "react";
 
 export default function ContactPage() {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [message, setMessage] = useState('');
-  const [error, setError] = useState('');
-  const [status, setStatus] = useState('');
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+  const [status, setStatus] = useState("");
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (!email) {
-      setError("Email is required");
+      setStatus("Email is required");
       return;
     }
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
-      setError("Please enter a valid email address");
+      setStatus("Please enter a valid email address");
       return;
     }
 
-    setError("");
     setStatus("Sending...");
 
     try {
@@ -42,13 +40,13 @@ export default function ContactPage() {
         setEmail("");
         setMessage("");
       } else {
-        setStatus("Error: " + result.error);
+        console.log("Error: " + result);
       }
     } catch (error) {
-      setStatus("Failed to send message. Try again later.");
+      console.error("Error sending message:", error);
+      setStatus("Failed to send message. Please try again later.");
     }
   };
-
   return (
     <section className="contact-container bg-cover bg-center backdrop-blur-md text-white rounded-lg max-w-3xl mx-auto my-24 p-8 shadow-lg">
       <h2 className="text-3xl font-bold text-center mb-6">Contact Me</h2>
@@ -72,7 +70,6 @@ export default function ContactPage() {
             required
             className="w-full p-2 rounded-md border border-gray-300 text-black"
           />
-          {error && <span className="text-red-500 text-sm">{error}</span>}
         </div>
         <div>
           <label className="block mb-1 font-semibold">Message:</label>
