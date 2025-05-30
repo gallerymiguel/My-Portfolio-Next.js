@@ -1,13 +1,14 @@
+// app/contact/page.tsx
 "use client";
 
-import React, { useState } from 'react';
+import { useState } from 'react';
 
-const Contact: React.FC = () => {
-  const [name, setName] = useState<string>('');
-  const [email, setEmail] = useState<string>('');
-  const [message, setMessage] = useState<string>('');
-  const [error, setError] = useState<string>('');
-  const [status, setStatus] = useState<string>('');
+export default function ContactPage() {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [message, setMessage] = useState('');
+  const [error, setError] = useState('');
+  const [status, setStatus] = useState('');
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -93,6 +94,4 @@ const Contact: React.FC = () => {
       </form>
     </section>
   );
-};
-
-export default Contact;
+}
