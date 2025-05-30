@@ -2,6 +2,7 @@
 import { notFound } from "next/navigation";
 import projects from "../../../data/projects";
 import Image from "next/image";
+import "../../../styles/ProjectPage.css";
 
 export default async function ProjectPage({
   params,
